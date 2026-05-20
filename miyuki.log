@@ -1,0 +1,55 @@
+Miyuki - 2026-05-19 19:13:53 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='dvmm-399', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-19 19:13:54 - INFO - Search 'dvmm-399' found: https://missav.live/dvmm-399
+Miyuki - 2026-05-19 19:13:54 - INFO - https://missav.live/dvmm-399
+Miyuki - 2026-05-19 19:13:54 - INFO - Processing: https://missav.live/dvmm-399
+Miyuki - 2026-05-19 19:13:54 - INFO - Extracted UUID: c2416379-8e92-4fb8-84e3-61a66991ee01
+Miyuki - 2026-05-19 19:17:45 - INFO - Segments: 1781/1781 (100.0% complete)
+Miyuki - 2026-05-19 19:17:45 - INFO - FFmpeg merging...
+Miyuki - 2026-05-19 19:18:05 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-19 19:18:05 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/dvmm-399_720p.mp4
+Miyuki - 2026-05-19 19:18:05 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/dvmm-399_720p.mp4 (1781/1781 segments)
+Miyuki - 2026-05-19 19:46:44 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='sw-950', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-19 19:46:44 - INFO - Search 'sw-950' found: https://missav.live/dm39/sw-950
+Miyuki - 2026-05-19 19:46:44 - INFO - https://missav.live/dm39/sw-950
+Miyuki - 2026-05-19 19:46:44 - INFO - Processing: https://missav.live/dm39/sw-950
+Miyuki - 2026-05-19 19:46:45 - INFO - Extracted UUID: f17fa4f3-4e70-428e-b7ad-441455a56027
+Miyuki - 2026-05-19 19:53:21 - INFO - Segments: 3074/3074 (100.0% complete)
+Miyuki - 2026-05-19 19:53:21 - INFO - FFmpeg merging...
+Miyuki - 2026-05-19 19:54:05 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-19 19:54:05 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/sw-950_720p.mp4
+Miyuki - 2026-05-19 19:54:05 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/sw-950_720p.mp4 (3074/3074 segments)
+Miyuki - 2026-05-19 23:55:37 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='scop-798', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-19 23:55:41 - INFO - Search 'scop-798' found: https://missav.live/dm28/scop-798
+Miyuki - 2026-05-19 23:55:41 - INFO - https://missav.live/dm28/scop-798
+Miyuki - 2026-05-19 23:55:41 - INFO - Processing: https://missav.live/dm28/scop-798
+Miyuki - 2026-05-19 23:55:42 - INFO - Extracted UUID: 394599b2-d367-464b-bd36-28319b2528df
+Miyuki - 2026-05-20 00:45:57 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='scop-798', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-20 00:45:59 - INFO - Search 'scop-798' found: https://missav.live/dm28/scop-798
+Miyuki - 2026-05-20 00:45:59 - INFO - https://missav.live/dm28/scop-798
+Miyuki - 2026-05-20 00:45:59 - INFO - Processing: https://missav.live/dm28/scop-798
+Miyuki - 2026-05-20 00:45:59 - INFO - Extracted UUID: 394599b2-d367-464b-bd36-28319b2528df
+Miyuki - 2026-05-20 00:50:50 - INFO - Segments: 2183/2183 (100.0% complete)
+Miyuki - 2026-05-20 00:50:50 - INFO - FFmpeg merging...
+Miyuki - 2026-05-20 00:51:25 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-20 00:51:25 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/scop-798_720p.mp4
+Miyuki - 2026-05-20 00:51:25 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/scop-798_720p.mp4 (2183/2183 segments)
+Miyuki - 2026-05-20 01:03:09 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='huntb-353', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-20 01:03:12 - INFO - Search 'huntb-353' found: https://missav.live/dm94/huntb-353
+Miyuki - 2026-05-20 01:03:12 - INFO - https://missav.live/dm94/huntb-353
+Miyuki - 2026-05-20 01:03:12 - INFO - Processing: https://missav.live/dm94/huntb-353
+Miyuki - 2026-05-20 01:03:13 - INFO - Extracted UUID: a510cc9f-4f5a-43f3-b959-34c1d4d99fdd
+Miyuki - 2026-05-20 01:08:27 - INFO - Segments: 2061/2061 (100.0% complete)
+Miyuki - 2026-05-20 01:08:27 - INFO - FFmpeg merging...
+Miyuki - 2026-05-20 01:08:54 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-20 01:08:54 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/huntb-353_720p.mp4
+Miyuki - 2026-05-20 01:08:54 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/huntb-353_720p.mp4 (2061/2061 segments)
+Miyuki - 2026-05-20 03:21:35 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='moil-001', file=None, proxy=None, output=None, ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-20 03:21:37 - INFO - Search 'moil-001' found: https://missav.live/moil-001
+Miyuki - 2026-05-20 03:21:37 - INFO - https://missav.live/moil-001
+Miyuki - 2026-05-20 03:21:37 - INFO - Processing: https://missav.live/moil-001
+Miyuki - 2026-05-20 03:21:38 - INFO - Extracted UUID: da5c49c5-2ec0-43f0-82b3-f76208d6bdec
+Miyuki - 2026-05-20 03:23:07 - INFO - Segments: 2010/2010 (100.0% complete)
+Miyuki - 2026-05-20 03:23:07 - INFO - FFmpeg merging...
+Miyuki - 2026-05-20 03:23:32 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-20 03:23:32 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/moil-001_720p.mp4
+Miyuki - 2026-05-20 03:23:32 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/moil-001_720p.mp4 (2010/2010 segments)

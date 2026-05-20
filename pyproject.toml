@@ -1,0 +1,23 @@
+[project]
+name = "missav-downloader"
+version = "0.2.0"
+description = "A tool for downloading videos from MissAV"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "curl-cffi>=0.15.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "pydantic>=2.0.0",
+]
+
+[project.scripts]
+miyuki = "miyuki.cli:main"
+miyuki-server = "miyuki.api:start"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["miyuki"]
