@@ -4,11 +4,12 @@ import logging
 import os
 import threading
 import uuid as uuid_lib
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
 import uvicorn
-from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from miyuki.core import MiyukiService
@@ -41,6 +42,10 @@ class DownloadRequest(BaseModel):
     download_cover: bool = Field(default=True, description="Download cover image")
     use_title_as_filename: bool = Field(
         default=False, description="Use title as filename"
+    )
+    webhook_url: str | None = Field(
+        default=None,
+        description="URL to POST notification when task completes or fails",
     )
 
 
@@ -95,6 +100,12 @@ def _new_service() -> MiyukiService:
 # and each request gets its own thread with its own MiyukiService/Session.
 
 
+@app.get("/health")
+def health():
+    """Health check endpoint."""
+    return {"status": "ok"}
+
+
 @app.get("/search", response_model=SearchResponse)
 def search(q: str):
     """Search for movies by keyword."""
@@ -125,7 +136,8 @@ def get_info(url: str):
 def create_task(req: DownloadRequest):
     """Submit a download task. Returns immediately with a task_id.
 
-    The download runs in a background thread. Poll GET /tasks/{task_id} for progress.
+    The download runs in a background thread. Poll GET /tasks/{task_id} for progress,
+    or provide a webhook_url to receive a POST notification on completion/failure.
     """
     task_id = str(uuid_lib.uuid4())[:8]
     quality = req.quality or os.environ.get("MIYUKI_QUALITY", "720")
@@ -178,10 +190,30 @@ def delete_task(task_id: str):
 # ─── Background task runner ───────────────────────────────────────────────────
 
 
+def _send_webhook(webhook_url: str, payload: dict):
+    """POST webhook notification. Fire-and-forget, errors are logged."""
+    try:
+        import urllib.request
+        import json
+
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            webhook_url,
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            logger.info(f"Webhook sent to {webhook_url}, status: {resp.status}")
+    except Exception as e:
+        logger.error(f"Webhook failed for {webhook_url}: {e}")
+
+
 def _run_download_task(task_id: str, req: DownloadRequest, quality: str):
     """Execute download in its own thread with its own MiyukiService/Session."""
     task = _tasks[task_id]
     task["status"] = TaskStatus.in_progress
+    title = None
 
     def progress_callback(current: int, total: int):
         task["progress_current"] = current
@@ -202,10 +234,33 @@ def _run_download_task(task_id: str, req: DownloadRequest, quality: str):
         task["output_path"] = result.output_path
         task["progress_current"] = result.segment_downloaded
         task["progress_total"] = result.segment_total
+        title = result.title
     except Exception as e:
         task["status"] = TaskStatus.failed
         task["error"] = str(e)
         logger.error(f"Task {task_id} failed: {e}")
+
+    # Send webhook notification if configured
+    if req.webhook_url:
+        event = (
+            "task.completed"
+            if task["status"] == TaskStatus.completed
+            else "task.failed"
+        )
+        payload = {
+            "event": event,
+            "task_id": task_id,
+            "movie_url": req.movie_url,
+            "title": title,
+            "status": task["status"].value,
+            "quality": quality,
+            "output_path": task.get("output_path"),
+            "segment_total": task.get("progress_total", 0),
+            "segment_downloaded": task.get("progress_current", 0),
+            "error": task.get("error"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+        _send_webhook(req.webhook_url, payload)
 
 
 # ─── Server entry point ──────────────────────────────────────────────────────

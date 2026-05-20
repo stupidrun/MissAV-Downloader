@@ -1,0 +1,14 @@
+.venv/
+.git/
+.github/
+.ruff_cache/
+__pycache__/
+*.pyc
+*.log
+downloads/
+movies_folder_miyuki/
+tmp_movie_miyuki.html
+ffmpeg_input_miyuki.txt
+downloaded_urls_miyuki.txt
+uv.lock
+.python-version

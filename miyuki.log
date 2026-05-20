@@ -53,3 +53,13 @@ Miyuki - 2026-05-20 03:23:07 - INFO - FFmpeg merging...
 Miyuki - 2026-05-20 03:23:32 - INFO - FFmpeg merge completed.
 Miyuki - 2026-05-20 03:23:32 - INFO - Download complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/moil-001_720p.mp4
 Miyuki - 2026-05-20 03:23:32 - INFO - Complete: /home/ftc/coding/MissAV-Downloader/movies_folder_miyuki/moil-001_720p.mp4 (2010/2010 segments)
+Miyuki - 2026-05-20 16:52:42 - INFO - Namespace(urls=None, auth=None, plist=None, limit=None, search='jul-268', file=None, proxy=None, output='/home/ftc/miyuki_downloads/', ffmpeg=True, cover=True, ffcover=False, noban=False, title=False, quality='720', retry=None, delay=None, timeout=None)
+Miyuki - 2026-05-20 16:52:45 - INFO - Search 'jul-268' found: https://missav.live/dm73/jul-268
+Miyuki - 2026-05-20 16:52:45 - INFO - https://missav.live/dm73/jul-268
+Miyuki - 2026-05-20 16:52:45 - INFO - Processing: https://missav.live/dm73/jul-268
+Miyuki - 2026-05-20 16:52:45 - INFO - Extracted UUID: eeefca4e-320e-4891-8076-11a9239ca8c9
+Miyuki - 2026-05-20 16:54:01 - INFO - Segments: 2255/2255 (100.0% complete)
+Miyuki - 2026-05-20 16:54:01 - INFO - FFmpeg merging...
+Miyuki - 2026-05-20 16:54:29 - INFO - FFmpeg merge completed.
+Miyuki - 2026-05-20 16:54:29 - INFO - Download complete: /home/ftc/miyuki_downloads/jul-268_720p.mp4
+Miyuki - 2026-05-20 16:54:29 - INFO - Complete: /home/ftc/miyuki_downloads/jul-268_720p.mp4 (2255/2255 segments)

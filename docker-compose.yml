@@ -1,0 +1,22 @@
+services:
+  miyuki:
+    build: .
+    container_name: miyuki-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./downloads:/downloads
+    environment:
+      - MIYUKI_OUTPUT=/downloads
+      - MIYUKI_QUALITY=720
+      - MIYUKI_RETRY=5
+      - MIYUKI_DELAY=2
+      - MIYUKI_TIMEOUT=10
+      # - MIYUKI_PROXY=host.docker.internal:7890
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3

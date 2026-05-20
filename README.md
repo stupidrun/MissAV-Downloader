@@ -1,136 +1,270 @@
-![MissAV-Downloader](https://socialify.git.ci/MiyukiQAQ/MissAV-Downloader/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
+# Miyuki
 
-## ⭐️ Miyuki
+A tool for downloading videos from the MissAV website. Supports CLI and HTTP API modes.
 
-A tool for downloading videos from the "MissAV" website.
+## Installation
 
-## ⚙️ Installation
+Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
 
-To install Miyuki from the Python Package Index (PyPI) run:
-
-```
-pip install miyuki
-```
-
-To upgrade Miyuki from the Python Package Index (PyPI) run:
-
-```
-pip install --upgrade miyuki
+```bash
+git clone https://github.com/your-repo/MissAV-Downloader.git
+cd MissAV-Downloader
+uv sync
 ```
 
-## 📷 Snapshot
+Optional: install FFmpeg for better video quality (recommended):
 
-![snapshot.png](https://raw.githubusercontent.com/MiyukiQAQ/MissAV-Downloader/master/resources/readme_pics/snapshot.png)
+```bash
+# Ubuntu/Debian
+sudo apt install ffmpeg
 
-## 📖 Instructions
-
-```
-[root@miyuki ~]# miyuki -h
-usage: miyuki.py [-h] [-urls  [...]] [-auth  [...]] [-plist] [-limit] [-search] [-file] [-proxy] [-ffmpeg] [-cover] [-ffcover] [-noban] [-title] [-quality] [-retry] [-delay] [-timeout]
-
-A tool for downloading videos from the "MissAV" website.
-
-Main Options:
-Use the -urls   option to specify the video URLs to download.
-Use the -auth   option to specify the username and password to download the videos collected by the account.
-Use the -plist  option to specify the public playlist URL to download all videos in the list.
-Use the -search option to search for movie by serial number and download it.
-Use the -file   option to download all URLs in the file. ( Each line is a URL )
-
-Additional Options:
-Use the -limit   option to limit the number of downloads. (Only works with the -plist option.)
-Use the -proxy   option to configure http proxy server ip and port.
-Use the -ffmpeg  option to get the best video quality. ( Recommend! )
-Use the -cover   option to save the cover when downloading the video
-Use the -ffcover option to set the cover as the video preview (ffmpeg required)
-Use the -noban   option to turn off the miyuki banner when downloading the video
-Use the -title   option to use the full title as the movie file name
-Use the -quality option to specify the movie resolution (360, 480, 720, 1080...)
-Use the -retry   option to specify the number of retries for downloading segments
-Use the -delay   option to specify the delay before retry ( seconds )
-Use the -timeout option to specify the timeout for segment download ( seconds )
-
-options:
-  -h, --help     show this help message and exit
-  -urls  [ ...]  Movie URLs, separate multiple URLs with spaces
-  -auth  [ ...]  Username and password, separate with space
-  -plist         Public playlist url
-  -limit         Limit the number of downloads
-  -search        Movie serial number
-  -file          File path
-  -proxy         HTTP(S) proxy
-  -ffmpeg        Enable ffmpeg processing
-  -cover         Download video cover
-  -ffcover       Set cover as preview (ffmpeg required)
-  -noban         Do not display the banner
-  -title         Full title as file name
-  -quality       Specify the movie resolution
-  -retry         Number of retries for downloading segments
-  -delay         Delay in seconds before retry
-  -timeout       Timeout in seconds for segment download
-
-Examples:
-  miyuki -plist "https://missav.ai/search/JULIA?filters=uncensored-leak&sort=saved" -limit 50 -ffmpeg
-  miyuki -plist "https://missav.ai/search/JULIA?filters=individual&sort=views" -limit 20 -ffmpeg
-  miyuki -plist "https://missav.ai/dm132/actresses/JULIA" -limit 20 -ffmpeg -cover
-  miyuki -plist "https://missav.ai/playlists/ewzoukev" -ffmpeg -proxy localhost:7890
-  miyuki -urls https://missav.ai/sw-950 https://missav.ai/dandy-917
-  miyuki -urls https://missav.ai/sw-950 -proxy localhost:7890
-  miyuki -auth miyuki@gmail.com miyukiQAQ -ffmpeg
-  miyuki -file /home/miyuki/url.txt -ffmpeg
-  miyuki -search sw-950 -ffcover
+# macOS
+brew install ffmpeg
 ```
 
-## 💬 The ```-plist``` option
+## CLI Usage
 
-- Use the -plist option to download movies from a playlist.
-- This playlist can be a public playlist created by your own account, or any playlist displayed based on search results or tag filters.
-- **You should wrap the playlist URL with " " when you use the -plist option.**
+```bash
+uv run miyuki [options]
+```
 
-Command Examples:
-- ```miyuki -plist "https://missav.ai/search/JULIA?filters=uncensored-leak&sort=saved" -limit 50 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/search/JULIA?filters=individual&sort=views" -limit 20 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/dm132/actresses/JULIA" -limit 20 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/playlists/ewzoukev" -limit 20 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/dm444/en/labels/WANZ" -limit 20 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/dm21/en/makers/Takara%20Visual" -limit 20 -ffmpeg```
-- ```miyuki -plist "https://missav.ai/dm1/en/genres/4K" -limit 20 -ffmpeg```
+### Main Options (exactly one required)
 
-## 💡 Precautions
+| Option | Description |
+|--------|-------------|
+| `-urls URL [URL ...]` | Download from specific URLs |
+| `-search KEYWORD` | Search by serial number and download first result |
+| `-plist URL` | Download all videos from a playlist URL |
+| `-auth EMAIL PASSWORD` | Login and download all favorited videos |
+| `-file PATH` | Download all URLs listed in a file (one per line) |
 
-- If you are from an ancient oriental country, you will most likely need a proxy.
-- Use ffmpeg to synthesize videos for the best experience.
+### Additional Options
 
-## 👀 About FFmpeg
+| Option | Description |
+|--------|-------------|
+| `-output PATH` | Output directory (default: `movies_folder_miyuki`) |
+| `-quality N` | Resolution: 360, 480, 720, 1080 (default: 720) |
+| `-ffmpeg` | Use FFmpeg for merging (better quality, recommended) |
+| `-cover` | Download video cover image |
+| `-ffcover` | Embed cover as video preview (requires FFmpeg) |
+| `-title` | Use full title as output filename |
+| `-proxy HOST:PORT` | HTTP(S) proxy |
+| `-limit N` | Limit number of downloads (only with `-plist`) |
+| `-retry N` | Retry count for segment downloads (default: 5) |
+| `-delay N` | Delay in seconds before retry (default: 2) |
+| `-timeout N` | Request timeout in seconds (default: 10) |
+| `-noban` | Hide the startup banner |
 
-1. If you want miyuki to use ffmpeg to process the video, use the -ffmpeg option.
-2. Please check whether the ffmpeg command is valid before using the -ffmpeg option. (e.g. ```ffmpeg -version```)
-3. To install FFmpeg, please refer to https://ffmpeg.org/
+### Examples
 
-## 📄 Disclaimer
+```bash
+# Search and download
+uv run miyuki -search sw-950 -ffmpeg
 
-This project is licensed under the [MIT License](LICENSE). The following additional disclaimers and notices apply:
+# Specify quality and output directory
+uv run miyuki -search sw-950 -quality 1080 -output ~/Videos -ffmpeg
 
-### 1. Legal Compliance
-- This software is provided solely for **communication, research, learning, and personal use**.  
-- Users are responsible for ensuring that their use of this software complies with all applicable laws and regulations in their jurisdiction.  
-- The software must not be used for any unlawful, unethical, or unauthorized purposes, including but not limited to violating third-party rights or legal restrictions.
+# Download from URL with proxy
+uv run miyuki -urls https://missav.live/sw-950 -proxy localhost:7890 -ffmpeg -cover
 
-### 2. No Warranty
-As stated in the MIT License:  
-> "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT."
+# Batch download from playlist (limit 10)
+uv run miyuki -plist "https://missav.live/search/JULIA?filters=uncensored-leak&sort=saved" -limit 10 -ffmpeg
 
-### 3. Limitation of Liability
-- The author(s) shall not be held liable for any claims, damages, or other liabilities arising from or in connection with the use or performance of this software.  
-- Users bear all risks and responsibilities for the use of this software, including but not limited to data loss, system damage, or legal consequences.
+# Download from file
+uv run miyuki -file urls.txt -ffmpeg -title
+```
 
-### 4. Third-Party Dependencies
-- This project may include or depend on third-party libraries or tools. Users are responsible for reviewing and complying with the licenses and terms of these dependencies.
+### Environment Variables
 
-### 5. Security and Privacy
-- This software may interact with user systems, networks, or data. Users should implement appropriate security measures to protect sensitive information and infrastructure.  
-- The authors are not responsible for any security vulnerabilities or data breaches resulting from the use of this software.
+All options support environment variable fallback (CLI args take priority):
 
-## 📈 Star History
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MIYUKI_QUALITY` | `720` | Default resolution |
+| `MIYUKI_OUTPUT` | `movies_folder_miyuki` | Output directory |
+| `MIYUKI_RETRY` | `5` | Retry count |
+| `MIYUKI_DELAY` | `2` | Retry delay (seconds) |
+| `MIYUKI_TIMEOUT` | `10` | Request timeout (seconds) |
 
-[![Star History Chart](https://api.star-history.com/svg?repos=MiyukiQAQ/MissAV-Downloader&type=Date)](https://star-history.com/#MiyukiQAQ/MissAV-Downloader&Date)
+## API Server
+
+Start the HTTP API server:
+
+```bash
+uv run miyuki-server
+```
+
+Server listens on `http://0.0.0.0:8000` by default. Interactive docs at `http://localhost:8000/docs`.
+
+### API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/health` | Health check |
+| GET | `/search?q=keyword` | Search for videos |
+| GET | `/info?url=...` | Get video metadata (without downloading) |
+| POST | `/tasks` | Submit a download task |
+| GET | `/tasks` | List all tasks |
+| GET | `/tasks/{task_id}` | Get task status and progress |
+| DELETE | `/tasks/{task_id}` | Remove a task record |
+
+### POST /tasks — Request Body
+
+```json
+{
+  "movie_url": "https://missav.live/sw-950",
+  "quality": "720",
+  "use_ffmpeg": true,
+  "download_cover": true,
+  "use_title_as_filename": false,
+  "webhook_url": "https://your-server.com/hooks/miyuki"
+}
+```
+
+All fields except `movie_url` are optional.
+
+### POST /tasks — Response
+
+```json
+{
+  "task_id": "a1b2c3d4",
+  "status": "pending",
+  "movie_url": "https://missav.live/sw-950",
+  "quality": "720",
+  "progress_current": 0,
+  "progress_total": 0,
+  "output_path": null,
+  "error": null
+}
+```
+
+Poll `GET /tasks/{task_id}` to track progress. `progress_current` / `progress_total` updates in real-time during download.
+
+### Webhook Notification
+
+If `webhook_url` is provided in the download request, a POST will be sent to that URL when the task completes or fails:
+
+```json
+{
+  "event": "task.completed",
+  "task_id": "a1b2c3d4",
+  "movie_url": "https://missav.live/sw-950",
+  "title": "SW-950 ...",
+  "status": "completed",
+  "quality": "720",
+  "output_path": "/downloads/sw-950_720p.mp4",
+  "segment_total": 3074,
+  "segment_downloaded": 3074,
+  "error": null,
+  "timestamp": "2025-05-19T23:44:04+00:00"
+}
+```
+
+The `event` field is either `task.completed` or `task.failed`.
+
+### Server Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MIYUKI_HOST` | `0.0.0.0` | Listen address |
+| `MIYUKI_PORT` | `8000` | Listen port |
+| `MIYUKI_OUTPUT` | `./downloads` | Download output directory |
+| `MIYUKI_QUALITY` | `720` | Default resolution |
+| `MIYUKI_PROXY` | — | HTTP proxy (e.g. `localhost:7890`) |
+| `MIYUKI_RETRY` | `5` | Retry count |
+| `MIYUKI_DELAY` | `2` | Retry delay (seconds) |
+| `MIYUKI_TIMEOUT` | `10` | Request timeout (seconds) |
+
+## Docker Deployment
+
+### Quick Start
+
+```bash
+docker compose up -d
+```
+
+This builds the image (includes FFmpeg), starts the server on port 8000, and mounts `./downloads` for output.
+
+### docker-compose.yml
+
+```yaml
+services:
+  miyuki:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./downloads:/downloads
+    environment:
+      - MIYUKI_OUTPUT=/downloads
+      - MIYUKI_QUALITY=720
+      # - MIYUKI_PROXY=host.docker.internal:7890
+    restart: unless-stopped
+```
+
+### Using Proxy in Docker
+
+To route traffic through a proxy running on the host machine:
+
+```yaml
+environment:
+  - MIYUKI_PROXY=host.docker.internal:7890
+```
+
+### Health Check
+
+```bash
+curl http://localhost:8000/health
+# {"status":"ok"}
+```
+
+## Project Structure
+
+```
+miyuki/
+├── __init__.py    — Public API exports
+├── client.py      — HTTP client (TLS fingerprint impersonation, retry)
+├── models.py      — Data models (MovieInfo, DownloadResult)
+├── core.py        — Core service (MiyukiService class)
+├── cli.py         — CLI entry point
+└── api.py         — FastAPI server
+```
+
+### Using as a Library
+
+```python
+from miyuki import MiyukiService
+
+service = MiyukiService(output_dir="./my_videos", quality="1080")
+
+# Search
+urls = service.search("sw-950")
+
+# Get info without downloading
+info = service.get_movie_info(urls[0])
+print(info.title, info.available_qualities)
+
+# Download
+result = service.download(urls[0], use_ffmpeg=True)
+print(result.output_path)
+```
+
+## How It Works
+
+1. Fetches the video page HTML from MissAV
+2. Extracts the video UUID from obfuscated JavaScript
+3. Retrieves the HLS playlist from the CDN (`surrit.com`)
+4. Selects the requested resolution
+5. Downloads all video segments (`.jpeg` files — actually MPEG-TS segments disguised with image extensions)
+6. Merges segments into a single `.mp4` file (via FFmpeg or binary concatenation)
+
+## Notes
+
+- Uses `curl_cffi` for TLS fingerprint impersonation to bypass Cloudflare protection
+- A `Referer` header is required for CDN requests
+- Downloaded URLs are recorded in `downloaded_urls_miyuki.txt` to avoid re-downloading. Delete this file or the relevant line to re-download
+- Without `-ffmpeg`, videos are merged by binary concatenation (works but seeking may be imprecise in some players)
+
+## License
+
+[MIT License](LICENSE)
